@@ -1,2 +1,9 @@
-# BetterTigerPaws
-This is a project for Software Engineering to build an improved course registration system.  
+# Node Hello World
+
+Simple node.js app that servers "hello world"
+
+Great for testing simple deployments to the cloud
+
+## Run It
+
+`npm start`
