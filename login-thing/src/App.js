@@ -4,10 +4,12 @@ import './App.css';
 import {Amplify, Auth} from 'aws-amplify';
 import awsconfig from './aws-exports';
 import {Authenticator, withAuthenticator} from '@aws-amplify/ui-react';
+import Index from './pages';
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
+//var perf = require('./products.html');
 function App() {
   return (
     <div className="App">
@@ -15,7 +17,8 @@ function App() {
       <Authenticator>
       {({ signOut, user }) => (
         <main>
-          <h1>Hello {user.username}</h1>
+          
+          <Index/>
           <button onClick={signOut}>Sign out</button>
         </main>
       )}
