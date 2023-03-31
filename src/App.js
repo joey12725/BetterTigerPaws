@@ -7,8 +7,13 @@ import {Authenticator, withAuthenticator} from '@aws-amplify/ui-react';
 import Index from './pages';
 import Products from './pages/products';
 import Accounts from './pages/accounts';
-import AddProduct from './pages/addProducts'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import AddProduct from './pages/addProducts';
+import Login from './pages/Login';
+import {Footer} from './pages/footer';
+import { SignInFooter } from './pages/signInFooter';
+import { Header } from './pages/header';
+import { SignInHeader } from './pages/signInHeader';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
 Amplify.configure(awsconfig);
@@ -19,7 +24,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        
       <Authenticator>
+      
       {({ signOut, user }) => (
         <main>
           <Router>
@@ -40,4 +47,11 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+export default withAuthenticator(App, {components: {
+  Header,
+  SignIn: {
+    Header: SignInHeader,
+    Footer: SignInFooter
+  },
+  Footer
+}});

@@ -1,7 +1,9 @@
 import React, {Fragment} from 'react';
+/*
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
+*/
 import logo from '../img/Trin-icon.png';
 function MenuBar(){
     return(
