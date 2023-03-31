@@ -1,6 +1,9 @@
 import React, {Fragment} from 'react';
 
 import MenuBar from "./menuBar";
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 function Index(){
     return(
         <Fragment>

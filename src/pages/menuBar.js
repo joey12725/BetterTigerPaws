@@ -1,4 +1,8 @@
 import React, {Fragment} from 'react';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import logo from '../img/Trin-icon.png';
 function MenuBar(){
     return(
         <Fragment>
@@ -7,7 +11,7 @@ function MenuBar(){
                 <nav className="navbar navbar-expand-xl navbar-light bg-light">
                     <a className="navbar-brand" href="index">
                         
-                        <img src="../../public/img/Trin-icon.png" alt="Tiger" height="60%" width="20%"/>
+                        <img src={logo} alt="Tiger" height="60%" width="20%"/>
                         <h1 className="tm-site-title mb-0">Dashboard</h1>
                     </a>
                     <button className="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

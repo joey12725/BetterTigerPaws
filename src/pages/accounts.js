@@ -102,7 +102,7 @@ function Accounts(){
                     <h2 className="tm-block-title">Profile Image</h2>
                     <img src="../../public/img/guy.jpg" alt="Profile Image" className="img-fluid"/>
                     <div className="custom-file mt-3 mb-3">
-                        <input id="fileInput" type="file" />
+                        <input id="fileInput" type="file"/>
                         <input type="button" className="btn btn-primary d-block mx-xl-auto" value="Upload New..." onclick="document.getElementById('fileInput').click();"
                         />
                     </div>
