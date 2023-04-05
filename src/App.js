@@ -31,10 +31,10 @@ function App() {
         <main>
           <Router>
             <Routes>
-              <Route path = 'index' element = {<Index/>}/>
-              <Route path = 'products' element = {<Products/>}/>
-              <Route path = 'accounts' element = {<Accounts/>}/>
-              <Route path = 'add-product' element = {<AddProduct/>}/>
+              <Route path = '/' element = {<Index/>}/>
+              <Route path = '/products' element = {<Products/>}/>
+              <Route path = '/accounts' element = {<Accounts/>}/>
+              <Route path = '/add-product' element = {<AddProduct/>}/>
             </Routes>
           </Router>
           <Index/>
