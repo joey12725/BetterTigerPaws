@@ -14,10 +14,10 @@ function Dashboard(){
         
 
         <body id="reportsPage">
-        <MenuBar/>
+        
         <div className="" id="home">
         <div className="container">
-        
+        <MenuBar/>
             
             <div className="row tm-content-row tm-mt-big">
                 <div className="tm-col tm-col-big">
