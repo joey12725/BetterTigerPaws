@@ -17,7 +17,7 @@ async function signOut() {
     }
 }
 
-function MenuBar(signout){
+function MenuBar(){
     return(
             <div className="row">
             <div className="col-12">

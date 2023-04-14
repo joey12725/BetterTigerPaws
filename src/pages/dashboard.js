@@ -6,12 +6,18 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 function Dashboard(){
     return(
-        <Fragment>
+        
+        
             
-            <body id="reportsPage">
+        
+        
+        
+
+        <body id="reportsPage">
+        <MenuBar/>
         <div className="" id="home">
         <div className="container">
-            <MenuBar/>
+        
             
             <div className="row tm-content-row tm-mt-big">
                 <div className="tm-col tm-col-big">
@@ -94,8 +100,9 @@ function Dashboard(){
     <script src="../../public/js/tooplate-scripts.js"></script>
     
     </body>
-        </Fragment>
-    )
+        
+        
+    );
 }
 
 export default Dashboard;

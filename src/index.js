@@ -16,37 +16,16 @@ import Login from "./pages/Login";
 const AppLayout = () => {
   return(
     <div>
-      <MenuBar/>
-      <App/>
+      
     </div>
   )
 
 }
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Dashboard/>,
-
-
-  },
-  {
-    path: "accounts",
-    element: <div><Accounts/></div>,
-  },
-  {
-    path: "products",
-    element: <div><Products/></div>,
-  },
-  {
-    path: "login",
-    element: <div><Login/></div>,
-  },
-]);
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-
+    
+    <App/>
   </React.StrictMode>
 );

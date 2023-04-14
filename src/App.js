@@ -4,7 +4,6 @@ import './App.css';
 import {Amplify, Auth} from 'aws-amplify';
 import awsconfig from './aws-exports';
 import {Authenticator, withAuthenticator} from '@aws-amplify/ui-react';
-import Index from './pages';
 import Products from './pages/products';
 import Accounts from './pages/accounts';
 import AddProduct from './pages/addProducts';
@@ -13,34 +12,55 @@ import {Footer} from './pages/footer';
 import { SignInFooter } from './pages/signInFooter';
 import { Header } from './pages/header';
 import { SignInHeader } from './pages/signInHeader';
-import {BrowserRouter as Router, Routes, Route, Redirect} from 'react-router-dom';
+import {  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+  Outlet,} from 'react-router-dom';
+import { createRoot } from "react-dom/client";
 import MenuBar from './pages/menuBar';
 import Dashboard from './pages/dashboard';
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
-const test = () => {
-  console.log("test");
-}
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Dashboard/>,
+
+
+  },
+  {
+    path: "accounts",
+    element: <div><Accounts/></div>,
+  },
+  {
+    path: "products",
+    element: <div><Products/></div>,
+  },
+  {
+    path: "login",
+    element: <div><Login/></div>,
+  },
+]);
 //var perf = require('./products.html');
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+
         
       <Authenticator>
       
       {({ signOut, user }) => (
-        <main>
-          test(),
-          <MenuBar/>
-          <Dashboard/>
-          <button onClick={signOut}>Sign out</button>
-        </main>
+        <div>
+        
+        <RouterProvider router={router} />
+        <button onClick={signOut}>Sign out</button>
+
+          
+        </div>
       )}
     </Authenticator>
-      </header>
-    </div>
+
   );
 }
 
