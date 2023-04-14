@@ -1,4 +1,6 @@
 import React, {Fragment} from 'react';
+
+
 function Login(){
     return(
         <Fragment>
@@ -27,7 +29,7 @@ function Login(){
                                     <input name="password" type="password" class="form-control validate" id="password" value="1234" required/>
                                 </div>
                                 <div class="input-group mt-3">
-                                    <button type="submit" class="btn btn-primary d-inline-block mx-auto">Login</button>
+
                                 </div>
                                 <div class="input-group mt-3">
                                     <p><em>Placeholder Login.</em></p>

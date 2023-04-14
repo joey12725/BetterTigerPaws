@@ -13,12 +13,15 @@ import {Footer} from './pages/footer';
 import { SignInFooter } from './pages/signInFooter';
 import { Header } from './pages/header';
 import { SignInHeader } from './pages/signInHeader';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-
-
+import {BrowserRouter as Router, Routes, Route, Redirect} from 'react-router-dom';
+import MenuBar from './pages/menuBar';
+import Dashboard from './pages/dashboard';
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
+const test = () => {
+  console.log("test");
+}
 //var perf = require('./products.html');
 function App() {
   return (
@@ -29,15 +32,9 @@ function App() {
       
       {({ signOut, user }) => (
         <main>
-          <Router>
-            <Routes>
-              <Route path = '/' element = {<Index/>}/>
-              <Route path = '/products' element = {<Products/>}/>
-              <Route path = '/accounts' element = {<Accounts/>}/>
-              <Route path = '/add-product' element = {<AddProduct/>}/>
-            </Routes>
-          </Router>
-          <Index/>
+          test(),
+          <MenuBar/>
+          <Dashboard/>
           <button onClick={signOut}>Sign out</button>
         </main>
       )}
