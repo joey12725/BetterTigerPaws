@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-betterertigerpaws-dev-180501-authRole",
+      "UnauthRoleArn": "arn:aws:iam::013757184252:role/amplify-betterertigerpaws-dev-180501-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::013757184252:role/amplify-betterertigerpaws-dev-180501-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-betterertigerpaws-dev-180501-deployment",
+      "UnauthRoleName": "amplify-betterertigerpaws-dev-180501-unauthRole",
+      "StackName": "amplify-betterertigerpaws-dev-180501",
+      "StackId": "arn:aws:cloudformation:us-east-1:013757184252:stack/amplify-betterertigerpaws-dev-180501/e0239ed0-bd44-11ed-a33f-0af1821aa35d",
+      "AmplifyAppId": "d2lnv60072cj29"
+    },
+    "categories": {
+      "auth": {
+        "betterertigerpawsf9651512": {}
+      }
+    }
+  }
+}
