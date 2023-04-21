@@ -38,9 +38,11 @@ function MenuBar(){
                             <li className="nav-link">
                                 <Link to="/products">Products</Link>
                             </li>
-                            <li className="nav-link">
+                             
+                            {/* <li className="nav-link">
                                 <Link to="/accounts">Accounts</Link>
-                            </li>
+                            </li> */}
+                             
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
