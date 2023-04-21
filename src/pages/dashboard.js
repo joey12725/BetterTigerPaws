@@ -4,7 +4,35 @@ import MenuBar from "./menuBar";
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import FlatList from 'flatlist-react';
+
 function Dashboard(){
+    const people = [
+        {firstName: 'Elson', lastName: 'Correia', info: {age: 24}},
+        {firstName: 'John', lastName: 'Doe', info: {age: 18}},
+        {firstName: 'Jane', lastName: 'Doe', info: {age: 34}},
+        {firstName: 'Maria', lastName: 'Carvalho', info: {age: 22}},
+        {firstName: 'Kelly', lastName: 'Correia', info:{age: 23}},
+        {firstName: 'Don', lastName: 'Quichote', info: {age: 39}},
+        {firstName: 'Marcus', lastName: 'Correia', info: {age: 0}},
+        {firstName: 'Bruno', lastName: 'Gonzales', info: {age: 25}},
+        {firstName: 'Alonzo', lastName: 'Correia', info: {age: 44}}
+      ]
+
+const renderPerson = (person, idx) => {
+    return (
+        <div style={getItemStyle(idx)} key={idx}>
+      {person.firstName} {person.lastName} (<span>{person.info.age}</span>)
+    </div>
+    );
+  }
+  
+  const getItemStyle = (idx) => ({
+    padding: 20,
+    backgroundColor: idx % 2 === 0 ? '#c0c0c0' : '#ffffff',
+  });
+
+
     return(
         
         
@@ -27,30 +55,13 @@ function Dashboard(){
                                 <h2 className="tm-block-title d-inline-block">Current Schedule</h2>
                             </div>
                         </div>
-                        <table className="table table-hover table-striped mt-3">
-                            <tbody>
-                                <tr>
-                                    <td>Ancient Pottery Studies - CLAS-3455-2</td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td>Yoga Economics - ECON-3302</td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td>Advanced Quantum Calculus Deluxe - MATH - 1306-1</td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td>Philosophy of Cheese Selection (Abridged) - PHIL-2609-3</td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td>Studies of the Dubious - CSCI-3309</td>
-                                    <td> </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <FlatList
+                            list={people}
+                            renderItem={renderPerson}
+                            renderWhenEmpty={() => <div>You have no classes for this semester!</div>}
+                            displayrow
+
+                        />
                     </div>
                 </div>
                 <div className="tm-col tm-col-big">
@@ -105,7 +116,9 @@ function Dashboard(){
     );
 }
 
+
 export default Dashboard;
+
 
 //this was deleted from that empty script thing, didn't work, no clue why
 

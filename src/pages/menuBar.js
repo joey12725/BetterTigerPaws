@@ -31,13 +31,15 @@ function MenuBar(){
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mx-auto">
-                            <li className="nav-item">
-                            <Link to="/">Dashboard</Link>
+                            <li className="nav-link">
+                                
+                                <Link to="/">Dashboard</Link>
                             </li>
-                            <Link to="/products">Products</Link>
-
-                            <li className="nav-item">
-                            <Link to="/accounts">Accounts</Link>
+                            <li className="nav-link">
+                                <Link to="/products">Products</Link>
+                            </li>
+                            <li className="nav-link">
+                                <Link to="/accounts">Accounts</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -53,7 +55,7 @@ function MenuBar(){
                         </ul>
                         <ul className="navbar-nav">
                             <li className="nav-item">
-
+                                <button onClick={signOut}>Sign Out</button>
                             </li>
                         </ul>
                     </div>

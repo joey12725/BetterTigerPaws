@@ -54,7 +54,6 @@ function App() {
         <div>
         
         <RouterProvider router={router} />
-        <button onClick={signOut}>Sign out</button>
 
           
         </div>
@@ -64,11 +63,4 @@ function App() {
   );
 }
 
-export default withAuthenticator(App, {components: {
-  Header,
-  SignIn: {
-    Header: SignInHeader,
-    Footer: SignInFooter
-  },
-  Footer
-}});
+export default withAuthenticator(App);
