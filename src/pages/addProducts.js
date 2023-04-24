@@ -19,39 +19,41 @@ function AddProduct(){
                         <div className="col-xl-7 col-lg-7 col-md-12">
                             <form action="" className="tm-edit-product-form">
                                 <div className="input-group mb-3">
-                                    <label for="name" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Name
+                                    <label for="name" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Course ID
                                     </label>
                                     <input id="name" name="name" type="text" className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"/>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Description</label>
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Course Name</label>
                                     <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <label for="category" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Department</label>
-                                    <select className="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7" id="category">
-                                        <option selected>Select one</option>
-                                        <option value="1">CSCI</option>
-                                        <option value="2">PHYS</option>
-                                        <option value="3">FILM</option>
-                                    </select>
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Course Subject</label>
+                                    <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <label for="expire_date" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Start Date
-                                    </label>
-                                    <input id="expire_date" name="expire_date" type="text" className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
-                                        data-large-mode="true"/>
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Semester </label>
+                                    <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <label for="expire_date" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">End Date
-                                    </label>
-                                    <input id="expire_date" name="expire_date" type="text" className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
-                                        data-large-mode="true"/>
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Section Code</label>
+                                    <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <label for="stock" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Section
-                                    </label>
-                                    <input id="stock" name="stock" type="text" className="form-control validate col-xl-9 col-lg-8 col-md-7 col-sm-7"/>
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Meeting Time</label>
+                                    <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
+                                </div>
+                                <div className="input-group mb-3">
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Taught By</label>
+                                    <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
+                                </div>
+                                <div className="input-group mb-3">
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">Meeting Days</label>
+                                    <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
+                                </div>
+                                <div className="input-group mb-3">
+                                    <label for="description" className="col-xl-4 col-lg-4 col-md-4 col-sm-5 mb-2">User ID</label>
+                                    <textarea className="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" rows="3" required></textarea>
                                 </div>
                                 <div className="input-group mb-3">
                                     <div className="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">
