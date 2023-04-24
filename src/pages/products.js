@@ -1,6 +1,9 @@
 import React, {Fragment} from 'react';
 import MenuBar from "./menuBar";
+import {Link, Navigate} from 'react-router-dom';
 function Products(){
+    const classes = [{name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }, {name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }]
+    
     return(
         <Fragment>
 <body id="reportsPage" className="bg02">
@@ -16,7 +19,7 @@ function Products(){
 
                             </div>
                             <div className="col-md-4 col-sm-12 text-right">
-                                <a href="add-product" className="btn btn-small btn-primary">Create Class/Section</a>
+                                <Link to="/addproduct">Add Product</Link>
                             </div>
                         </div>
                         <div className="table-responsive">
@@ -31,96 +34,18 @@ function Products(){
                                         <th scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">High-level Programming</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">1102</td>
-                                        <td>Dr. Fogarty</td>
+                                {classes.map((item, index) => (
+                                    <div key={index}>
+                                    <th scope="row">
+                                        <input value={item.name} type="checkbox" />
+                                    </th>
+                                    <td className="tm-product-name">{item.name}</td>
+                                        <td className="text-center">{item.dept}</td>
+                                        <td className="text-center">{item.code}</td>
+                                        <td>{item.professor}</td>
                                         
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Enormous Data</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">4309</td>
-                                        <td>Dr. Luis</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Functional Languages 2</td>
-                                        <td className="text-center">PHIL</td>
-                                        <td className="text-center">3405</td>
-                                        <td>Dr. Massingill</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">AGILE Soda Drinking</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">2367</td>
-                                        <td>Dr. Horn</td>
-                                       
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Theoretical Coding</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">3301</td>
-                                        <td>Dr. Myers</td>
-                                       
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Pre-Algorithms</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">1401</td>
-                                        <td>Dr. Zhang</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Ransomware DIY</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">3396</td>
-                                        <td>Dr. Tan</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Pointers</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">1309</td>
-                                        <td>To be announced</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                </tbody>
+                                    </div>
+                                ))}
                             </table>
                         </div>
 
