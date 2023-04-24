@@ -121,6 +121,7 @@ const renderPerson = (section, idx) => {
                         />
                     </div>
                 </div>
+                {/*
                 <div className="tm-col tm-col-big">
                     <div className="bg-white tm-block">
                         <div className="row">
@@ -143,7 +144,9 @@ const renderPerson = (section, idx) => {
                         </table>
                     </div>
                 </div>
+    */}
             </div>
+    
             <footer className="row tm-mt-small">
                 <div className="col-12 font-weight-light">
                     <p className="d-inline-block tm-bg-black text-white py-2 px-4">
