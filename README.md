@@ -15,7 +15,11 @@ https://docs.google.com/document/d/1a_z6XrN8VD5szhaO5oXSwhGGkcNtbwqSzx7Mdi_WLls/
 Here is the Requirements Doc:
 https://docs.google.com/document/d/1u24WrwDxB6TZu5zfO1JngcvbISjbGVWcOSHRialLr0I/edit?usp=sharing
 
-For scheduling and tracking, we used ClickUp.com. Below is a picture of our board
+For scheduling and tracking, we used ClickUp.com. Below is a picture of our board.
 https://docs.google.com/document/d/1uauIqOQ_LU8ZjLe0FqabGNcEcj-xnpUbb-XP0Lwwtgo/edit?usp=sharing
+
+For meetings, we did not have planned meetings outside of class. Our meetings consisted of us updating our ClickUp, and most of our discussions over the app were done through Discord.com. If you want more info on the discussions, we can provide images of our Discord.
+
+
 
 
