@@ -9,3 +9,10 @@ The next issue is responsiveness. TigerPaws when at peak usage (during registrat
 
 The last problem is the design and layout of TigerPaws. It looks outdated and old-fashioned. The colors are unsaturated and the palette feels bland. It doesn’t use its space well with multiple large open areas everywhere and things aren’t centered in a consistent manner. We’ll solve this by using modern design layout and color structure.
 
+Here is our Documentation Doc: 
+https://docs.google.com/document/d/1a_z6XrN8VD5szhaO5oXSwhGGkcNtbwqSzx7Mdi_WLls/edit?usp=sharing
+
+Here is the Requirements Doc:
+https://docs.google.com/document/d/1u24WrwDxB6TZu5zfO1JngcvbISjbGVWcOSHRialLr0I/edit?usp=sharing
+
+
