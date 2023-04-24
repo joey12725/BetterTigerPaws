@@ -29,7 +29,8 @@
       "email"
     ],
     "userpoolClientReadAttributes": [
-      "email"
+      "email",
+      "custom:isAdmin"
     ],
     "userpoolClientLambdaRole": "betterf9651512_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
@@ -38,7 +39,8 @@
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "usernameAttributes": [
-      "email"
+      "email",
+      "custom:isAdmin"
     ],
     "userPoolGroupList": [],
     "serviceName": "Cognito",

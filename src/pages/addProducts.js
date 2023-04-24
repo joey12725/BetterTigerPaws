@@ -61,16 +61,7 @@ function AddProduct(){
                                 </div>
                             </form>
                         </div>
-                        <div className="col-xl-4 col-lg-4 col-md-12 mx-auto mb-4">
-                            <div className="tm-product-img-dummy mx-auto">
-                                <i className="fas fa-5x fa-cloud-upload-alt" onclick="document.getElementById('fileInput').click();"></i>
-                            </div>
-                            <div className="custom-file mt-3 mb-3">
-                                <input id="fileInput" type="file" />
-                                <input type="button" className="btn btn-primary d-block mx-auto" value="Upload Syllabus" onclick="document.getElementById('fileInput').click();"
-                                />
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

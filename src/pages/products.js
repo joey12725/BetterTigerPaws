@@ -1,11 +1,14 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import MenuBar from "./menuBar";
 import {Link, Navigate} from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import { Auth } from 'aws-amplify';
 function Products(){
     const classes = [{name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }, {name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }]
     let courses = [{course_name: "Empty", course_id: "Empty", taught_by: "Empty", section_code: "Empty", meeting_days: "Empty", meeting_time: "Empty", semester: "Empty"}]
+
+    const [userAttributes, setAttributes] = useState('Hi');
 
     const ListPostsQuery = gql`
     query MyQuery {
@@ -22,8 +25,22 @@ function Products(){
       
       
     `;
-    
-    
+    useEffect(() => {
+    async function getUserAttributes() {
+        // Retrieve the current authenticated user
+        const user = await Auth.currentAuthenticatedUser();
+      
+        // Retrieve the user's attributes
+        const attributes = user.attributes;
+      
+        // Print the attributes to the console
+        console.log(attributes);
+        setAttributes(attributes);
+      }
+      getUserAttributes();
+    }, []);
+
+    console.log(userAttributes)
     const { loading, error, data } = useQuery(ListPostsQuery);
       
         // Log the data
@@ -47,7 +64,13 @@ function Products(){
 
                             </div>
                             <div className="col-md-4 col-sm-12 text-right">
+
+                            {userAttributes['custom:isAdmin'] !== null && userAttributes['custom:isAdmin'] == 'True' ? (
                                 <Link to="/addproduct">Add Product</Link>
+                                ) : (
+                                <div></div>
+                                )}
+
                             </div>
                         </div>
                         <div className="table-responsive">
@@ -68,7 +91,7 @@ function Products(){
                                         <input value={item.course_name} type="checkbox" />
                                     </th>
                                     <td className="tm-product-name">{item.course_name}</td>
-                                        
+                                    <td className="text-center">{item.course_subj}</td>
                                         <td className="text-center">{item.section_code}</td>
                                         <td>{item.taught_by}</td>
                                         
