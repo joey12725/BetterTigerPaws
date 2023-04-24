@@ -1,12 +1,33 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 
 import MenuBar from "./menuBar";
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import FlatList from 'flatlist-react';
-
+import { Auth } from 'aws-amplify';
+import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
 function Dashboard(){
+    const [id, setId] = useState(null);
+    const [section, setSections] = useState(null);
+
+    const ListPostsQuery = gql`
+    query MyQuery($id: ID!) {
+        getCurrentSection(person_id: $id){
+          course_id
+          semester
+          meeting_time
+          meeting_days
+          taught_by
+          course_name
+        }
+      }
+      
+      
+      
+    `;
+    
     const people = [
         {firstName: 'Elson', lastName: 'Correia', info: {age: 24}},
         {firstName: 'John', lastName: 'Doe', info: {age: 18}},
@@ -19,10 +40,41 @@ function Dashboard(){
         {firstName: 'Alonzo', lastName: 'Correia', info: {age: 44}}
       ]
 
-const renderPerson = (person, idx) => {
+      
+      useEffect(() => {
+        async function requestData() {
+          try {
+            const session = await Auth.currentSession();
+            setId(session.getIdToken().payload.sub);
+            
+            
+          } catch (error) {
+            console.log('Error getting current session:', error);
+          }
+        }
+    
+        requestData();
+      }, []);
+      
+    console.log(id)
+
+    const { loading, error, data } = useQuery(ListPostsQuery, {variables: { id: id },});
+
+
+    useEffect(() => {
+        if (!loading && !error) {
+          
+          setSections(data.getCurrentSection);
+        }
+        else {
+            console.log("Error", error)
+        }
+      }, [loading, error, data]);
+    console.log(section) 
+const renderPerson = (section, idx) => {
     return (
         <div style={getItemStyle(idx)} key={idx}>
-      {person.firstName} {person.lastName} (<span>{person.info.age}</span>)
+      {section.course_name} {section.taught_by} {section.meeting_time} {section.meeting_days}
     </div>
     );
   }
@@ -31,6 +83,11 @@ const renderPerson = (person, idx) => {
     padding: 20,
     backgroundColor: idx % 2 === 0 ? '#c0c0c0' : '#ffffff',
   });
+
+
+    
+
+  
 
 
     return(
@@ -56,7 +113,7 @@ const renderPerson = (person, idx) => {
                             </div>
                         </div>
                         <FlatList
-                            list={people}
+                            list={section}
                             renderItem={renderPerson}
                             renderWhenEmpty={() => <div>You have no classes for this semester!</div>}
                             displayrow

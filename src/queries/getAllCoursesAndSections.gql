@@ -1,0 +1,12 @@
+query MyQuery {
+  getAllCoursesAndSections {
+    course_id
+    section {
+      taught_by
+      section_code
+      meeting_days
+      meeting_time
+      course_name
+    }
+  }
+}

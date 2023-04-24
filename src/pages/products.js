@@ -1,10 +1,38 @@
 import React, {Fragment} from 'react';
 import MenuBar from "./menuBar";
 import {Link, Navigate} from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
 function Products(){
     const classes = [{name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }, {name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }]
+    let courses = [{course_name: "Empty", course_id: "Empty", taught_by: "Empty", section_code: "Empty", meeting_days: "Empty", meeting_time: "Empty", semester: "Empty"}]
+
+    const ListPostsQuery = gql`
+    query MyQuery {
+        getAllSections {
+          meeting_time
+          section_code
+          semester
+          taught_by
+          meeting_days
+          course_name
+          course_id
+        }
+      }
+      
+      
+    `;
     
+    
+    const { loading, error, data } = useQuery(ListPostsQuery);
+      
+        // Log the data
+    if (!loading && !error) {
+          console.log('Query data:', data.getAllSections);
+          courses = data.getAllSections;
+    }
     return(
+        
         <Fragment>
 <body id="reportsPage" className="bg02">
     <div className="" id="home">
@@ -34,15 +62,15 @@ function Products(){
                                         <th scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
-                                {classes.map((item, index) => (
+                                {courses.map((item, index) => (
                                     <div key={index}>
                                     <th scope="row">
-                                        <input value={item.name} type="checkbox" />
+                                        <input value={item.course_name} type="checkbox" />
                                     </th>
-                                    <td className="tm-product-name">{item.name}</td>
-                                        <td className="text-center">{item.dept}</td>
-                                        <td className="text-center">{item.code}</td>
-                                        <td>{item.professor}</td>
+                                    <td className="tm-product-name">{item.course_name}</td>
+                                        
+                                        <td className="text-center">{item.section_code}</td>
+                                        <td>{item.taught_by}</td>
                                         
                                     </div>
                                 ))}

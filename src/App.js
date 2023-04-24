@@ -20,6 +20,7 @@ import {  createBrowserRouter,
 import { createRoot } from "react-dom/client";
 import MenuBar from './pages/menuBar';
 import Dashboard from './pages/dashboard';
+
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
