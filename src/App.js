@@ -1,7 +1,8 @@
+import {useState, useEffect} from "react";
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Amplify, Auth} from 'aws-amplify';
+import {Amplify, Auth, Hub} from 'aws-amplify';
 import awsconfig from './aws-exports';
 import {Authenticator, withAuthenticator} from '@aws-amplify/ui-react';
 import Products from './pages/products';
@@ -48,24 +49,44 @@ const router = createBrowserRouter([
     element: <div><AddProduct/></div>,
   }
 ]);
-//var perf = require('./products.html');
+
+
+
 function App() {
+  const [currentUser, setCurrentUser] = useState();
+
+useEffect(() => {
+  Hub.listen('auth', ({ payload }) => {
+
+    const { event } = payload;
+    if (event === 'signIn') {
+        setCurrentUser(true)
+    }
+    if (event === 'signOut' || event === 'autoSignIn') {
+
+        setCurrentUser(false)
+    }
+})
+
+
+
+}, [])
+  
   return (
 
         
-      <Authenticator>
-      
-      {({ signOut, user }) => (
+
+
         <div>
         
-        <RouterProvider router={router} />
+        {currentUser ? <RouterProvider router={router} /> : <Login/>}
 
           
         </div>
-      )}
-    </Authenticator>
+
+
 
   );
 }
 
-export default withAuthenticator(App);
+export default App;
