@@ -1,14 +1,15 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import MenuBar from "./menuBar";
 import {Link, Navigate} from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery ,useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { Auth } from 'aws-amplify';
 function Products(){
     const classes = [{name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }, {name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }]
     let courses = [{course_name: "Empty", course_id: "Empty", taught_by: "Empty", section_code: "Empty", meeting_days: "Empty", meeting_time: "Empty", semester: "Empty"}]
 
-    const [userAttributes, setAttributes] = useState('Hi');
+    const [userAttributes, setAttributes] = useState('');
+    const [selectedSections, setSelectedSections] = useState([]);
 
     const ListPostsQuery = gql`
     query MyQuery {
@@ -20,11 +21,28 @@ function Products(){
           meeting_days
           course_name
           course_id
+          course_subj
         }
       }
       
       
     `;
+
+    const RegisterMutation = gql`
+    mutation MyMutation($person_id: ID!, $section_code: String!) {
+        registerSection(person_id: $person_id, section_code: $section_code) {
+            course_id
+            semester
+            meeting_time
+            meeting_days
+            taught_by
+            course_name
+            course_subj
+      }
+    }
+      
+    `;
+
     useEffect(() => {
     async function getUserAttributes() {
         // Retrieve the current authenticated user
@@ -42,12 +60,30 @@ function Products(){
 
     console.log(userAttributes)
     const { loading, error, data } = useQuery(ListPostsQuery);
+    
+    const [registerSection, { data: dataMutation, loading: loadingMutation, error:errorMutation }] = useMutation(RegisterMutation);
       
+
         // Log the data
     if (!loading && !error) {
           console.log('Query data:', data.getAllSections);
           courses = data.getAllSections;
     }
+
+    const handleCheckboxChange = (event, item) => {
+        if (event.target.checked) {
+          setSelectedSections((prevSelectedCourses) => [...prevSelectedCourses, item]);
+        } else {
+          setSelectedSections((prevSelectedCourses) => prevSelectedCourses.filter((course) => course.section_code !== item.section_code));
+        }
+      };
+    
+      const handleAddSelectedCourses = () => {
+        selectedSections.forEach((section) => {
+            registerSection({ variables: { person_id: userAttributes.sub, section_code: section.section_code } });
+        });
+    };
+
     return(
         
         <Fragment>
@@ -82,42 +118,36 @@ function Products(){
                                         <th scope="col" className="text-center">Dept</th>
                                         <th scope="col" className="text-center">Class Code</th>
                                         <th scope="col">Professor</th>
-                                        <th scope="col">&nbsp;</th>
+                                       <th scope="col" className="text-center">Meeting Times</th>
+                                       <th scope="col" className="text-center">Meeting Days</th>
                                     </tr>
                                 </thead>
+                                <tbody>
                                 {courses.map((item, index) => (
-                                    <div key={index}>
+                                    <tr key={index}>
                                     <th scope="row">
-                                        <input value={item.course_name} type="checkbox" />
+                                        <input value={item.course_name} type="checkbox"
+                                        onChange={(event) => handleCheckboxChange(event, item)} />
                                     </th>
                                     <td className="tm-product-name">{item.course_name}</td>
                                     <td className="text-center">{item.course_subj}</td>
                                         <td className="text-center">{item.section_code}</td>
                                         <td>{item.taught_by}</td>
-                                        
-                                    </div>
+                                        <td>{item.meeting_days}</td>
+                                        <td>{item.meeting_time}</td>
+                                    </tr>
                                 ))}
+                                </tbody>
                             </table>
                         </div>
 
                         <div className="tm-table-mt tm-table-actions-row">
                             <div className="tm-table-actions-col-left">
-                                <button className="btn btn-danger">Add Selected to Dashboard</button>
+                                <button className="btn btn-danger" onClick={handleAddSelectedCourses}>Add Selected to Dashboard</button>
                             </div>
                             <div className="tm-table-actions-col-right">
-                                <span className="tm-pagination-label">Page</span>
-                                <nav aria-label="Page navigation" className="d-inline-block">
-                                    <ul className="pagination tm-pagination">
-                                        <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                        <li className="page-item">
-                                            <span className="tm-dots d-block">...</span>
-                                        </li>
-                                        <li className="page-item"><a className="page-link" href="#">13</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">14</a></li>
-                                    </ul>
-                                </nav>
+                                
+                                
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ import {Link, Navigate} from 'react-router-dom';
 import { Auth, signout} from 'aws-amplify';
 
 async function signOut() {
+    console.log("Signing Out")
     try {
       await Auth.signOut();
     } catch (error) {
@@ -42,18 +43,7 @@ function MenuBar(){
                             {/* <li className="nav-link">
                                 <Link to="/accounts">Accounts</Link>
                             </li> */}
-                             
-                            <li className="nav-item dropdown">
-                                <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Settings
-                                </div>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="#">Idk</a>
-                                    <a className="dropdown-item" href="#">Something</a>
-                                    <a className="dropdown-item" href="#">Useful</a>
-                                </div>
-                            </li>
+
                         </ul>
                         <ul className="navbar-nav">
                             <li className="nav-item">
