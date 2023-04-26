@@ -12,6 +12,9 @@ The last problem is the design and layout of TigerPaws. It looks outdated and ol
 Here is our Documentation Doc: 
 https://docs.google.com/document/d/1a_z6XrN8VD5szhaO5oXSwhGGkcNtbwqSzx7Mdi_WLls/edit?usp=sharing
 
+User documentation is located here:
+https://docs.google.com/document/d/1VEZnOdK6EvxEPDh5odh_N9TWL3iWAoIpsh6EOjUoIV0/edit?usp=sharing
+
 Here is the Requirements Doc:
 https://docs.google.com/document/d/1u24WrwDxB6TZu5zfO1JngcvbISjbGVWcOSHRialLr0I/edit?usp=sharing
 
