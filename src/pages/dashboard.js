@@ -1,12 +1,51 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 
 import MenuBar from "./menuBar";
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import FlatList from 'flatlist-react';
-
+import { Auth } from 'aws-amplify';
+import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
 function Dashboard(){
+    const [id, setId] = useState();
+    const [section, setSections] = useState();
+    const [pendingSection, setPendingSections] = useState();
+    const ListPostsQuery = gql`
+    query MyQuery($id: ID!) {
+        getCurrentSection(person_id: $id){
+          course_id
+          semester
+          meeting_time
+          meeting_days
+          taught_by
+          course_name
+        }
+      }
+      
+      
+      
+    `;
+    
+
+    const PendingSectionQuery = gql`
+    
+    query MyQuery($id: ID!) {
+        getPendingSection(person_id: $id) {
+          course_id
+          semester
+          meeting_time
+          meeting_days
+          taught_by
+          course_name
+          course_subj
+        }
+      }
+      
+      
+      
+    `;
     const people = [
         {firstName: 'Elson', lastName: 'Correia', info: {age: 24}},
         {firstName: 'John', lastName: 'Doe', info: {age: 18}},
@@ -19,18 +58,68 @@ function Dashboard(){
         {firstName: 'Alonzo', lastName: 'Correia', info: {age: 44}}
       ]
 
-const renderPerson = (person, idx) => {
-    return (
-        <div style={getItemStyle(idx)} key={idx}>
-      {person.firstName} {person.lastName} (<span>{person.info.age}</span>)
-    </div>
-    );
-  }
+      
+      useEffect(() => {
+        async function requestData() {
+          try {
+            const session = await Auth.currentSession();
+            setId(session.getIdToken().payload.sub);
+            
+            
+          } catch (error) {
+            console.log('Error getting current session:', error);
+          }
+        }
+    
+        requestData();
+      }, []);
+      
+    console.log(id)
+
+    const { loading, error, data } = useQuery(ListPostsQuery, {variables: { id: id },});
+
+    const {loading: loadingPending, error: errorPending, data:dataPending} = useQuery(PendingSectionQuery, {variables: { id: id },});
+
+    useEffect(() => {
+        if (!loading && !error) {
+          
+          setSections(data.getCurrentSection);
+        }
+        else {
+            console.log("Error", error)
+        }
+      }, [loading, error, data]);
+    
+
+      useEffect(() => {
+        if (!loadingPending && !errorPending) {
+          
+          setPendingSections(dataPending.getPendingSection);
+        }
+        else {
+            console.log("Error", error)
+        }
+      }, [loadingPending, errorPending, dataPending]);
+
+      console.log(section) 
+    
+      const renderPerson = (section, idx) => {
+        return (
+            <div style={getItemStyle(idx)} key={idx}>
+        {section.course_name} {section.taught_by} {section.meeting_time} {section.meeting_days}
+        </div>
+        );
+    }
   
   const getItemStyle = (idx) => ({
     padding: 20,
     backgroundColor: idx % 2 === 0 ? '#c0c0c0' : '#ffffff',
   });
+
+
+    
+
+  
 
 
     return(
@@ -56,7 +145,7 @@ const renderPerson = (person, idx) => {
                             </div>
                         </div>
                         <FlatList
-                            list={people}
+                            list={section}
                             renderItem={renderPerson}
                             renderWhenEmpty={() => <div>You have no classes for this semester!</div>}
                             displayrow
@@ -64,29 +153,28 @@ const renderPerson = (person, idx) => {
                         />
                     </div>
                 </div>
+                
                 <div className="tm-col tm-col-big">
                     <div className="bg-white tm-block">
                         <div className="row">
                             <div className="col-12">
-                                <h2 className="tm-block-title d-inline-block">Dashboarded Classes</h2>
+                                <h2 className="tm-block-title d-inline-block">Pending Classes</h2>
                             </div>
                         </div>
                         <table className="table table-hover table-striped mt-3">
-                            <tbody>
-                                <tr>
-                                    <td>Hispanic Basket Weaving - ANTH-1301-2</td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td>Classic Cambodian Film Hist. - FILM-2309</td>
-                                    <td> </td>
-                                </tr>
-                                
-                            </tbody>
+                        <FlatList
+                            list={pendingSection}
+                            renderItem={renderPerson}
+                            renderWhenEmpty={() => <div>You have no pending classes!</div>}
+                            displayrow
+
+                        />
                         </table>
                     </div>
                 </div>
+    
             </div>
+    
             <footer className="row tm-mt-small">
                 <div className="col-12 font-weight-light">
                     <p className="d-inline-block tm-bg-black text-white py-2 px-4">

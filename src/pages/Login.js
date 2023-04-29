@@ -1,11 +1,19 @@
-import React, {Fragment} from 'react';
-
-
+import React, {Fragment, useState} from 'react';
+import {Auth} from 'aws-amplify';
+import Logo from '../img/Trin-icon.png';
 function Login(){
+    let [email, setEmail] = useState('');
+    let [password, setPassword] = useState('');
+    
+    let handleSubmit = async (event) => {
+        event.preventDefault();
+        let response = await Auth.signIn(email,password)
+        console.log(response)
+      };
+    
+    
     return(
-        <Fragment>
-            
-<body class="bg03">
+        <body class="bg03">
     <div class="container">
         <div class="row tm-mt-big">
             <div class="col-12 mx-auto tm-login-col">
@@ -13,8 +21,8 @@ function Login(){
                     <div class="row">
                         <div class="col-12 text-center">
                             
-                            <img src="../../public/img/Trin-icon.png" alt="Tiger" height="60%" width="20%"/>
-                            <h2 class="tm-block-title mt-3">BetterER Tigerpaws</h2>
+                            <img src={Logo}/>
+                            <h2 class="tm-block-title mt-3">Better Tigerpaws</h2>
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -22,17 +30,17 @@ function Login(){
                             <form action="index" method="post" class="tm-login-form">
                                 <div class="input-group">
                                     <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
-                                    <input name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username" value="admin" required/>
+                                    <input name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username" placeholder="Enter Your Username" value={email} onChange={e => setEmail(e.target.value)} required/>
                                 </div>
                                 <div class="input-group mt-3">
                                     <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
-                                    <input name="password" type="password" class="form-control validate" id="password" value="1234" required/>
+                                    <input name="password" type="password" class="form-control validate" id="password" placeholder="Enter Your Password" value={password} onChange={e => setPassword(e.target.value)} required/>
                                 </div>
                                 <div class="input-group mt-3">
 
                                 </div>
                                 <div class="input-group mt-3">
-                                    <p><em>Placeholder Login.</em></p>
+                                <button className="btn btn-primary" onClick={handleSubmit}>Login</button>
                                 </div>
                             </form>
                         </div>
@@ -49,8 +57,8 @@ function Login(){
         </footer>
     </div>
 </body>
-        </Fragment>
-    )
+  
+    );
 }
 
 export default Login;

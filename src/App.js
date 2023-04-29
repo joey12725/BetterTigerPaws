@@ -42,6 +42,10 @@ const router = createBrowserRouter([
     path: "login",
     element: <div><Login/></div>,
   },
+  {
+    path: "addProduct",
+    element: <div><AddProduct/></div>,
+  }
 ]);
 //var perf = require('./products.html');
 function App() {

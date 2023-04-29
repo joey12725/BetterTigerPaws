@@ -1,7 +1,91 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import MenuBar from "./menuBar";
+import {Link, Navigate} from 'react-router-dom';
+import { useQuery ,useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
+import { Auth } from 'aws-amplify';
 function Products(){
+    const classes = [{name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }, {name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }]
+    let courses = [{course_name: "Empty", course_id: "Empty", taught_by: "Empty", section_code: "Empty", meeting_days: "Empty", meeting_time: "Empty", semester: "Empty"}]
+
+    const [userAttributes, setAttributes] = useState('');
+    const [selectedSections, setSelectedSections] = useState([]);
+
+    const ListPostsQuery = gql`
+    query MyQuery {
+        getAllSections {
+          meeting_time
+          section_code
+          semester
+          taught_by
+          meeting_days
+          course_name
+          course_id
+          course_subj
+        }
+      }
+      
+      
+    `;
+
+    const RegisterMutation = gql`
+    mutation MyMutation($person_id: ID!, $section_code: String!) {
+        registerSection(person_id: $person_id, section_code: $section_code) {
+            course_id
+            semester
+            meeting_time
+            meeting_days
+            taught_by
+            course_name
+            course_subj
+      }
+    }
+      
+    `;
+
+    useEffect(() => {
+    async function getUserAttributes() {
+        // Retrieve the current authenticated user
+        const user = await Auth.currentAuthenticatedUser();
+      
+        // Retrieve the user's attributes
+        const attributes = user.attributes;
+      
+        // Print the attributes to the console
+        console.log(attributes);
+        setAttributes(attributes);
+      }
+      getUserAttributes();
+    }, []);
+
+    console.log(userAttributes)
+    const { loading, error, data } = useQuery(ListPostsQuery);
+    
+    const [registerSection, { data: dataMutation, loading: loadingMutation, error:errorMutation }] = useMutation(RegisterMutation);
+      
+
+        // Log the data
+    if (!loading && !error) {
+          console.log('Query data:', data.getAllSections);
+          courses = data.getAllSections;
+    }
+
+    const handleCheckboxChange = (event, item) => {
+        if (event.target.checked) {
+          setSelectedSections((prevSelectedCourses) => [...prevSelectedCourses, item]);
+        } else {
+          setSelectedSections((prevSelectedCourses) => prevSelectedCourses.filter((course) => course.section_code !== item.section_code));
+        }
+      };
+    
+      const handleAddSelectedCourses = () => {
+        selectedSections.forEach((section) => {
+            registerSection({ variables: { person_id: userAttributes.sub, section_code: section.section_code } });
+        });
+    };
+
     return(
+        
         <Fragment>
 <body id="reportsPage" className="bg02">
     <div className="" id="home">
@@ -16,7 +100,13 @@ function Products(){
 
                             </div>
                             <div className="col-md-4 col-sm-12 text-right">
-                                <a href="add-product" className="btn btn-small btn-primary">Create Class/Section</a>
+
+                            {userAttributes['custom:isAdmin'] !== null && userAttributes['custom:isAdmin'] == 'True' ? (
+                                <Link to="/addproduct">Add Product</Link>
+                                ) : (
+                                <div></div>
+                                )}
+
                             </div>
                         </div>
                         <div className="table-responsive">
@@ -28,120 +118,36 @@ function Products(){
                                         <th scope="col" className="text-center">Dept</th>
                                         <th scope="col" className="text-center">Class Code</th>
                                         <th scope="col">Professor</th>
-                                        <th scope="col">&nbsp;</th>
+                                       <th scope="col" className="text-center">Meeting Times</th>
+                                       <th scope="col" className="text-center">Meeting Days</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">High-level Programming</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">1102</td>
-                                        <td>Dr. Fogarty</td>
-                                        
-                                        <td> </td>
+                                {courses.map((item, index) => (
+                                    <tr key={index}>
+                                    <th scope="row">
+                                        <input value={item.course_name} type="checkbox"
+                                        onChange={(event) => handleCheckboxChange(event, item)} />
+                                    </th>
+                                    <td className="tm-product-name">{item.course_name}</td>
+                                    <td className="text-center">{item.course_subj}</td>
+                                        <td className="text-center">{item.section_code}</td>
+                                        <td>{item.taught_by}</td>
+                                        <td>{item.meeting_days}</td>
+                                        <td>{item.meeting_time}</td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Enormous Data</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">4309</td>
-                                        <td>Dr. Luis</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Functional Languages 2</td>
-                                        <td className="text-center">PHIL</td>
-                                        <td className="text-center">3405</td>
-                                        <td>Dr. Massingill</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">AGILE Soda Drinking</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">2367</td>
-                                        <td>Dr. Horn</td>
-                                       
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Theoretical Coding</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">3301</td>
-                                        <td>Dr. Myers</td>
-                                       
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Pre-Algorithms</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">1401</td>
-                                        <td>Dr. Zhang</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Ransomware DIY</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">3396</td>
-                                        <td>Dr. Tan</td>
-                                        
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" aria-label="Checkbox"/>
-                                        </th>
-                                        <td className="tm-product-name">Pointers</td>
-                                        <td className="text-center">CSCI</td>
-                                        <td className="text-center">1309</td>
-                                        <td>To be announced</td>
-                                        
-                                        <td> </td>
-                                    </tr>
+                                ))}
                                 </tbody>
                             </table>
                         </div>
 
                         <div className="tm-table-mt tm-table-actions-row">
                             <div className="tm-table-actions-col-left">
-                                <button className="btn btn-danger">Add Selected to Dashboard</button>
+                                <button className="btn btn-danger" onClick={handleAddSelectedCourses}>Add Selected to Dashboard</button>
                             </div>
                             <div className="tm-table-actions-col-right">
-                                <span className="tm-pagination-label">Page</span>
-                                <nav aria-label="Page navigation" className="d-inline-block">
-                                    <ul className="pagination tm-pagination">
-                                        <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                        <li className="page-item">
-                                            <span className="tm-dots d-block">...</span>
-                                        </li>
-                                        <li className="page-item"><a className="page-link" href="#">13</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">14</a></li>
-                                    </ul>
-                                </nav>
+                                
+                                
                             </div>
                         </div>
                     </div>
