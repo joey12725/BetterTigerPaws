@@ -14,7 +14,6 @@ async function signOut() {
       await Auth.signOut();
     } catch (error) {
       console.log('error signing out: ', error);
-      <Navigate to="/login" replace={true} />
     }
 }
 
