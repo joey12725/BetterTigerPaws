@@ -7,8 +7,13 @@ function Login(){
     
     let handleSubmit = async (event) => {
         event.preventDefault();
+        try{
         let response = await Auth.signIn(email,password)
         console.log(response)
+        }
+        catch(error){
+            window.alert("Email or password is incorrect!");
+        }
       };
     
     
@@ -30,11 +35,11 @@ function Login(){
                             <form action="index" method="post" class="tm-login-form">
                                 <div class="input-group">
                                     <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
-                                    <input name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username" placeholder="Enter Your Username" value={email} onChange={e => setEmail(e.target.value)} required/>
+                                    <input name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username" placeholder="username" value={email} onChange={e => setEmail(e.target.value)} required/>
                                 </div>
                                 <div class="input-group mt-3">
                                     <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
-                                    <input name="password" type="password" class="form-control validate" id="password" placeholder="Enter Your Password" value={password} onChange={e => setPassword(e.target.value)} required/>
+                                    <input name="password" type="password" class="form-control validate" id="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} required/>
                                 </div>
                                 <div class="input-group mt-3">
 
