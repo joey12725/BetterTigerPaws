@@ -7,8 +7,13 @@ function Login(){
     
     let handleSubmit = async (event) => {
         event.preventDefault();
+        try{
         let response = await Auth.signIn(email,password)
         console.log(response)
+        }
+        catch(error){
+            window.alert("Email or password is incorrect!");
+        }
       };
     
     
