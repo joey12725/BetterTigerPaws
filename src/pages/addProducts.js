@@ -3,6 +3,9 @@ import MenuBar from "./menuBar";
 import {Link, Navigate} from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import NavBar from './NavBar';
+
+
 function AddProduct(){
     let [courseName, setCourseName] = useState('');
     let [courseID, setCourseID] = useState('');
@@ -81,6 +84,7 @@ function AddProduct(){
         <Fragment>
             
 <body className="bg02">
+    <NavBar></NavBar>
     <div className="container">
         <MenuBar/>
         <div className="row tm-mt-big">

@@ -4,6 +4,9 @@ import {Link, Navigate} from 'react-router-dom';
 import { useQuery ,useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { Auth } from 'aws-amplify';
+import NavBar from './NavBar';
+
+
 function Products(){
     const classes = [{name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }, {name: 'Biology', code: 'BIO 101', professor: 'Dr. Smith', dept: 'Biology' }]
     let courses = [{course_name: "Empty", course_id: "Empty", taught_by: "Empty", section_code: "Empty", meeting_days: "Empty", meeting_time: "Empty", semester: "Empty"}]
@@ -89,6 +92,7 @@ function Products(){
         <Fragment>
 <body id="reportsPage" className="bg02">
     <div className="" id="home">
+        <NavBar></NavBar>
         <div className="container">
             <MenuBar/>
             <div className="row tm-content-row tm-mt-big">
