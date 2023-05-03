@@ -20,6 +20,8 @@ import {  createBrowserRouter,
 import { createRoot } from "react-dom/client";
 import MenuBar from './pages/menuBar';
 import Dashboard from './pages/dashboard';
+import NavBar from "/Users/trevs/BetterTigerPaws/src/pages/NavBar.js";
+
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
@@ -76,7 +78,12 @@ function App() {
         
         <div>
         
-        {currentUser ? <RouterProvider router={router}/> : <Login/>}
+      {currentUser ? (
+        <>
+          <RouterProvider router={router} >
+            <NavBar currentPage='register' />
+          </RouterProvider> </>
+      ) : <Login />}
 
           
         </div>

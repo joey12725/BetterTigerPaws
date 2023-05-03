@@ -1,4 +1,6 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import NavBar from './NavBar';
+
 
 import MenuBar from "./menuBar";
 import 'bootstrap';
@@ -131,8 +133,8 @@ function Dashboard(){
         
 
         <body id="reportsPage">
-        
         <div className="" id="home">
+        <NavBar />
         <div className="container">
         <MenuBar/>
             
