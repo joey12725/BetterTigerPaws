@@ -106,7 +106,7 @@ function Products(){
                             <div className="col-md-4 col-sm-12 text-right">
 
                             {userAttributes['custom:isAdmin'] !== null && userAttributes['custom:isAdmin'] == 'True' ? (
-                                <Link to="/addproduct">Add Product</Link>
+                                <Link to="/addproduct">Add Class</Link>
                                 ) : (
                                 <div></div>
                                 )}

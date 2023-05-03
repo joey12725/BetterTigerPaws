@@ -4,7 +4,7 @@ import './App.css';
 import {Amplify, Auth, Hub} from 'aws-amplify';
 import awsconfig from './aws-exports';
 import {Authenticator, withAuthenticator} from '@aws-amplify/ui-react';
-import Products from './pages/products';
+import Classes from './pages/products';
 import Accounts from './pages/accounts';
 import AddProduct from './pages/addProducts';
 import Login from './pages/Login';
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   // },
   {
     path: "products",
-    element: <div><Products/></div>,
+    element: <div><Classes/></div>,
   },
   {
     path: "login",

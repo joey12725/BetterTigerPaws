@@ -36,7 +36,7 @@ function MenuBar(){
                                 <Link to="/">Dashboard</Link>
                             </li>
                             <li className="nav-link">
-                                <Link to="/products">Products</Link>
+                                <Link to="/products">Classes</Link>
                             </li>
                              
                             {/* <li className="nav-link">

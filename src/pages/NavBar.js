@@ -14,10 +14,10 @@ const NavBar = ({ currentPage }) => {
           <NavLink to="/" exact activeClassName="active">User Info</NavLink>
         </li>
         <li className="navbar__menu-item">
-          <NavLink to="/products" exact activeClassName="active">products</NavLink>
+          <NavLink to="/products" exact activeClassName="active">classes</NavLink>
         </li>
         <li className="navbar__menu-item">
-          <NavLink to="/addProduct" exact activeClassName="active">addProduct</NavLink>
+          <NavLink to="/addProduct" exact activeClassName="active">add classes</NavLink>
         </li>
       </ul>
     </nav>
