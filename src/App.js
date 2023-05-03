@@ -20,7 +20,7 @@ import {  createBrowserRouter,
 import { createRoot } from "react-dom/client";
 import MenuBar from './pages/menuBar';
 import Dashboard from './pages/dashboard';
-import NavBar from "/Users/trevs/BetterTigerPaws/src/pages/NavBar.js";
+import NavBar from "../src/pages/NavBar.js";
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);

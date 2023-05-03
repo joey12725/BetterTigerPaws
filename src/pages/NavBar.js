@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '/Users/trevs/BetterTigerPaws/src/pages/nav.css';
+import '../pages/nav.css';
 
 
 
